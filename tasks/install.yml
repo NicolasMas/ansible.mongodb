@@ -1,0 +1,8 @@
+---
+
+  - name: mongodb  | install via yum
+    yum: name={{mongodb_package}} state=present
+
+  - name: mongodb  |  install additional packages
+    yum: name={{item}}
+    with_items: mongodb_additional_packages

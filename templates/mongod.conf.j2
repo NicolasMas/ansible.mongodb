@@ -1,0 +1,65 @@
+# {{ ansible_managed }}
+
+#where to log
+logpath = {{ mongodb_conf_logpath }}
+logappend = {{ mongodb_conf_logappend|to_nice_json|bool }}
+
+# fork and run in background
+fork = {{ mongodb_conf_fork|to_nice_json|bool }}
+
+# Port to use
+port = {{ mongodb_conf_port|int }}
+
+# Database root path
+dbpath = {{ mongodb_conf_dbpath }}
+
+# location of pidfile
+pidfilepath = {{ mongodb_pid_file_path }}
+
+# Listen to local interface only. Comment out to listen on all interfaces.
+bind_ip = {{ mongodb_conf_bind_ip }}
+
+# Turn on/off security.  Off is currently the default
+auth = {{ mongodb_conf_auth|to_nice_json|bool }}
+
+# Disables write-ahead journaling
+journal = {{ mongodb_conf_journal|to_nice_json|bool }}
+
+# Enables periodic logging of CPU utilization and I/O wait
+cpu = {{ mongodb_conf_cpu|to_nice_json|bool }}
+
+# Enable the HTTP interface (Defaults to port 28017).
+httpinterface = {{ mongodb_conf_httpinterface|to_nice_json|bool }}
+
+
+ ipv6 = {{ mongodb_conf_ipv6|to_nice_json|bool }}
+ maxConns = {{ mongodb_conf_maxConns|int }}
+ quotaFiles = {{ mongodb_conf_quotaFiles|int }}
+ syslog = {{ mongodb_conf_syslog|to_nice_json|bool }}
+ smallfiles = {{ mongodb_conf_smallfiles|to_nice_json|bool }}
+
+# Disable data file preallocation.
+noprealloc = {{ mongodb_conf_noprealloc|to_nice_json|bool }}
+
+# Turns off server-side scripting.  This will result in greatly limited
+# functionality
+noscripting = {{ mongodb_conf_noscripting|to_nice_json|bool }}
+
+# Turns off table scans.  Any query that would do a table scan fails.
+notablescan = {{ mongodb_conf_notablescan|to_nice_json|bool }}
+
+# Enable db quota management
+quota = {{ mongodb_conf_quota|to_nice_json|bool }}
+
+{% if mongodb_conf_replSet %}
+# Replica set options:
+replSet = {{ mongodb_conf_replSet }}
+## replIndexPrefetch = {{ mongodb_conf_replIndexPrefetch }}
+
+# maximum size in megabytes for replication operation log
+# [TODO ADD VAR] oplogSize=1024
+# path to a key file storing authentication info for connections
+# between replica set members
+# [TODO ADD VAR] keyFile=/path/to/keyfile
+
+{% endif %}
